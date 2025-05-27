@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@stream-io/video-react-sdk/dist/css/styles.css";
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Stream Video SDK custom styles */
+.str-video__call-controls {
+  @apply bg-gray-900;
+}
+
+.str-video__participant-view {
+  @apply rounded-lg overflow-hidden;
+}
+
+/* Fix text visibility in video calls */
+.str-video__participant-details,
+.str-video__participant-name,
+.str-video__call-stats,
+.str-video__call-stats-content,
+.str-video__menu-container,
+.str-video__menu-item {
+  color: white !important;
+}
+
+/* Ensure participant names are visible */
+.str-video__participant-details .str-video__participant-name {
+  background: rgba(0, 0, 0, 0.7) !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Fix call controls text */
+.str-video__call-controls button,
+.str-video__call-controls .str-video__icon {
+  color: white !important;
+}
+
+/* Fix menu and dropdown text */
+.str-video__menu-container,
+.str-video__generic-menu {
+  background: rgba(17, 24, 39, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.str-video__menu-item {
+  color: white !important;
+}
+
+.str-video__menu-item:hover {
+  background: rgba(55, 65, 81, 0.8) !important;
+}
+
+/* Fix participant list styling */
+.str-video__participant-list {
+  background: rgb(17, 24, 39) !important;
+}
+
+.str-video__participant-list .str-video__participant-name {
+  color: white !important;
+}
+
+/* Fix call stats and info text */
+.str-video__call-stats-content {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+
+/* Ensure all text in video interface is visible */
+.str-video__call-layout *,
+.str-video__speaker-layout *,
+.str-video__grid-layout * {
+  color: white !important;
+}
+
+/* Fix any remaining blue text issues */
+.str-video__call-layout .str-video__participant-view .str-video__participant-details,
+.str-video__speaker-layout .str-video__participant-view .str-video__participant-details {
+  color: white !important;
+}
+
+/* Change video stream background to match meeting room */
+.str-video__call-layout,
+.str-video__speaker-layout,
+.str-video__grid-layout {
+  background: rgb(17, 24, 39) !important;
+}
+
+.str-video__call-layout .str-video__participant-view,
+.str-video__speaker-layout .str-video__participant-view,
+.str-video__grid-layout .str-video__participant-view {
+  background: rgb(17, 24, 39) !important;
+}
