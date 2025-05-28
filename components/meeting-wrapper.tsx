@@ -210,30 +210,50 @@ export function MeetingWrapper({ roomId, onLeave }: MeetingWrapperProps) {
           `MeetingWrapper: Error joining call ${callInstance.id} (cacheKey: ${cacheKey}):`,
           error
         );
+
         if (mountedRef.current) {
           let userMessage = "Failed to join the call. Please try again.";
+          let specificErrorDetail = "An unknown error occurred.";
+
           // Provide more specific error messages for common device/permission issues
           if (error && typeof error.message === "string") {
             const errorMessage = error.message.toLowerCase();
+            specificErrorDetail = error.message; // Capture the original Stream error message
+
             if (
-              errorMessage.includes("failed to get video stream") ||
               errorMessage.includes("permission denied") ||
-              errorMessage.includes("notallowederror") ||
+              errorMessage.includes("notallowederror")
+            ) {
+              userMessage =
+                "Camera/Microphone access denied. Please check your browser permissions and try again.";
+            } else if (
+              errorMessage.includes("failed to get video stream") ||
               errorMessage.includes("notreadableerror") ||
               errorMessage.includes("device not found") ||
               errorMessage.includes("no camera available") ||
               errorMessage.includes("unable to capture video")
             ) {
               userMessage =
-                "Could not access your camera. Please check browser permissions, ensure your camera is connected, and not in use by another application.";
+                "Could not access your camera. Please ensure it's connected, not in use by another app, and check system settings.";
             } else if (
               errorMessage.includes("microphone") ||
               errorMessage.includes("unable to capture audio")
             ) {
               userMessage =
-                "Could not access your microphone. Please check browser permissions, ensure your microphone is connected, and not in use by another application.";
+                "Could not access your microphone. Please ensure it's connected, not in use by another app, and check system settings.";
+            } else if (
+              errorMessage.includes("call has already been ended") ||
+              errorMessage.includes("call has already been terminated")
+            ) {
+              userMessage = "This meeting has already ended.";
+            } else if (errorMessage.includes("call does not exist")) {
+              userMessage = "This meeting room does not exist.";
             }
           }
+
+          // Log the specific Stream error message for debugging purposes
+          console.error(`Stream SDK Error Detail: ${specificErrorDetail}`);
+
           setCallError(userMessage);
           // Reflect failed join attempt in cache
           callStateCache.set(cacheKey, {
