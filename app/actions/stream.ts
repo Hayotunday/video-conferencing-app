@@ -53,7 +53,7 @@ export async function generateStreamToken(userId: string) {
 
     const token = `${data}.${base64Signature}`
 
-    return { success: true, token }
+    return { success: true, token, apiKey }
   } catch (error) {
     console.error("Error generating Stream token:", error)
     return { success: false, error: "Failed to generate token" }

@@ -99,9 +99,9 @@ export function StreamProvider({ children }: { children: React.ReactNode }) {
       // Create new initialization promise
       initializationPromise = (async () => {
         try {
-          const { success, token, error: tokenError } = await generateStreamToken(userId)
+          const { success, token, apiKey, error: tokenError } = await generateStreamToken(userId)
 
-          if (!success || !token) {
+          if (!success || !token || !apiKey) {
             throw new Error(tokenError || "Failed to generate token")
           }
 
@@ -116,7 +116,7 @@ export function StreamProvider({ children }: { children: React.ReactNode }) {
 
           console.log("Creating Stream client with user:", streamUser)
 
-          const streamClient = createStreamClient(streamUser, token)
+          const streamClient = createStreamClient(streamUser, token, apiKey)
 
           // Store globally
           globalStreamClient = streamClient
@@ -134,7 +134,7 @@ export function StreamProvider({ children }: { children: React.ReactNode }) {
 
       return initializationPromise
     },
-    [disconnectClient, getUserDisplayName, user?.uid],
+    [disconnectClient, getUserDisplayName, user],
   )
 
   const retryConnection = useCallback(() => {
