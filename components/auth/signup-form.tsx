@@ -73,7 +73,7 @@ export function SignupForm({ onToggleMode }: SignupFormProps) {
           </div>
           <div className="space-y-2">
             <Label>Profile Picture</Label>
-            <ImageUpload currentImage={profileImage} onImageChange={handleImageChange} size="md" />
+            {/* <ImageUpload currentImage={profileImage} onImageChange={handleImageChange} size="md" /> */}
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
